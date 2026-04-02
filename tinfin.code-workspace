@@ -30,6 +30,9 @@
     "files.exclude": {
       "**/node_modules": true,
       "**/.turbo": true
+    },
+    "[json]": {
+      "editor.defaultFormatter": "vscode.json-language-features"
     }
   }
 }
