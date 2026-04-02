@@ -1,0 +1,35 @@
+{
+  "folders": [
+    { "name": "Root", "path": "." },
+    { "name": "Web (Dashboard)", "path": "apps/web" },
+    { "name": "API (Backend)", "path": "apps/api" },
+    { "name": "Widget", "path": "apps/widget" },
+    { "name": "pkg: DB", "path": "packages/db" },
+    { "name": "pkg: AI", "path": "packages/ai" },
+    { "name": "pkg: Types", "path": "packages/types" },
+    { "name": "pkg: UI", "path": "packages/ui" }
+  ],
+  "settings": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.tabSize": 2,
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "typescript.preferences.importModuleSpecifier": "non-relative",
+    "tailwindCSS.experimental.configFile": "apps/web/tailwind.config.ts",
+    "eslint.workingDirectories": [
+      { "directory": "apps/web", "changeProcessCWD": true },
+      { "directory": "apps/api", "changeProcessCWD": true },
+      { "directory": "apps/widget", "changeProcessCWD": true }
+    ],
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/.next": true,
+      "**/dist": true,
+      "**/.turbo": true
+    },
+    "files.exclude": {
+      "**/node_modules": true,
+      "**/.turbo": true
+    }
+  }
+}
