@@ -6,9 +6,16 @@
     "outDir": "dist",
     "rootDir": "src",
     "paths": {
-      "@tinfin/*": ["../../packages/*/src"]
+      "@tinfin/*": [
+        "../../packages/*/src"
+      ]
     }
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

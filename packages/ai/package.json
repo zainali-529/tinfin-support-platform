@@ -8,14 +8,19 @@
     ".": "./src/index.ts"
   },
   "dependencies": {
-    "@tinfin/types": "workspace:*",
-    "@tinfin/db": "workspace:*",
-    "openai": "^4.52.0",
     "@anthropic-ai/sdk": "^0.27.0",
+    "@supabase/supabase-js": "^2.45.0",
+    "@tinfin/db": "workspace:*",
+    "@tinfin/types": "workspace:*",
+    "cheerio": "^1.2.0",
+    "mammoth": "^1.12.0",
+    "openai": "^4.104.0",
+    "pdf-parse": "^2.4.5",
     "zod": "^3.23.0"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",
+    "@types/pdf-parse": "^1.1.5",
     "typescript": "5.9.2"
   }
 }

@@ -1,3 +1,4 @@
+// ============ Existing types (unchanged) ============
 export interface Organization {
   id: string
   name: string
@@ -94,6 +95,37 @@ export interface KBChunk {
   sourceTitle: string | null
   metadata: Record<string, unknown>
   createdAt: string
+}
+
+// ============ NEW: RAG Pipeline types ============
+
+/**
+ * RawChunk — crawler/parser se nikla raw data
+ * DB me save hone se PEHLE ka format
+ */
+export interface RawChunk {
+  content: string
+  sourceUrl?: string
+  sourceTitle?: string
+  metadata?: Record<string, unknown>
+}
+
+/**
+ * EmbeddedChunk — RawChunk + vector embedding
+ */
+export interface EmbeddedChunk extends RawChunk {
+  embedding: number[]
+}
+
+/**
+ * CrawlJobData — BullMQ job ka payload
+ */
+export interface CrawlJobData {
+  kbId: string
+  orgId: string
+  type: 'url' | 'site' | 'pdf' | 'docx'
+  url?: string
+  fileBase64?: string
 }
 
 export interface APIResponse<T> {

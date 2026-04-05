@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/components/ui/resizable'
 import { ConversationList } from '@/components/inbox/ConversationList'
 import { ConversationView } from '@/components/inbox/ConversationView'
 import { EmptyState } from '@/components/inbox/EmptyState'
@@ -43,21 +42,19 @@ export default function InboxPage() {
 
   return (
     <div className="h-[calc(100vh-4rem)] overflow-hidden rounded-xl border bg-background shadow-sm">
-      <ResizablePanelGroup direction="horizontal">
+      <div className="flex h-full">
         {/* Left: Conversation List */}
-        <ResizablePanel defaultSize={30} minSize={24} maxSize={40}>
+        <div className="w-[320px] border-r">
           <ConversationList
             conversations={conversations}
             loading={loading}
             selectedId={selectedId}
             onSelect={setSelectedId}
           />
-        </ResizablePanel>
-
-        <ResizableHandle withHandle />
+        </div>
 
         {/* Right: Conversation View */}
-        <ResizablePanel defaultSize={70}>
+        <div className="flex-1 min-w-0">
           {selected ? (
             <ConversationView
               conversation={selected}
@@ -67,8 +64,8 @@ export default function InboxPage() {
           ) : (
             <EmptyState />
           )}
-        </ResizablePanel>
-      </ResizablePanelGroup>
+        </div>
+      </div>
     </div>
   )
 }
