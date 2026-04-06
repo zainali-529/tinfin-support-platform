@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { httpBatchLink } from '@trpc/client'
 import { trpc } from '@/lib/trpc'
@@ -10,6 +10,19 @@ export function Providers({ children }: { children: React.ReactNode }) {
   const [queryClient] = useState(() => new QueryClient({
     defaultOptions: { queries: { staleTime: 30_000 } },
   }))
+
+  useEffect(() => {
+    const logSession = async () => {
+      const supabase = createClient()
+      const { data: { session } } = await supabase.auth.getSession()
+      if (session?.access_token) {
+        console.log('User Access Token:', session.access_token)
+      } else {
+        console.log('No active Supabase session found.')
+      }
+    }
+    logSession()
+  }, [])
 
   const [trpcClient] = useState(() =>
     trpc.createClient({

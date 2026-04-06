@@ -1,5 +1,33 @@
-import { pgTable, uuid, text, timestamp, boolean, jsonb, integer } from 'drizzle-orm/pg-core'
+import {
+  pgTable,
+  uuid,
+  text,
+  timestamp,
+  boolean,
+  jsonb,
+  integer,
+  customType,
+} from 'drizzle-orm/pg-core'
 import { sql } from 'drizzle-orm'
+
+// ─── pgvector custom type ─────────────────────────────────────────────────────
+export const vector = (name: string, dimensions: number) =>
+  customType<{ data: number[]; driverData: string }>({
+    dataType() {
+      return `vector(${dimensions})`
+    },
+    toDriver(value: number[]): string {
+      return `[${value.join(',')}]`
+    },
+    fromDriver(value: unknown): number[] {
+      return (value as string)
+        .replace(/^\[|\]$/g, '')
+        .split(',')
+        .map(Number)
+    },
+  })(name)
+
+// ─── Tables ───────────────────────────────────────────────────────────────────
 
 export const organizations = pgTable('organizations', {
   id: uuid('id').primaryKey().default(sql`gen_random_uuid()`),
@@ -68,6 +96,7 @@ export const kbChunks = pgTable('kb_chunks', {
   kbId: uuid('kb_id').references(() => knowledgeBases.id, { onDelete: 'cascade' }).notNull(),
   orgId: uuid('org_id').references(() => organizations.id, { onDelete: 'cascade' }).notNull(),
   content: text('content').notNull(),
+  embedding: vector('embedding', 1536),
   sourceUrl: text('source_url'),
   sourceTitle: text('source_title'),
   metadata: jsonb('metadata').default({}).notNull(),

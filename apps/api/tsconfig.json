@@ -4,7 +4,10 @@
     "module": "CommonJS",
     "moduleResolution": "Node",
     "outDir": "dist",
-    "rootDir": "src",
+    // ❌ REMOVE karo rootDir — ye hi problem tha
+    // "rootDir": "src",  <-- YE LINE HATAO
+    // ✅ rootDir remove karne se TypeScript khud infer karega
+    // aur package imports work karenge
     "paths": {
       "@tinfin/*": [
         "../../packages/*/src"
